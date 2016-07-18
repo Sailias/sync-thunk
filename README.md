@@ -47,7 +47,7 @@ import syncThunk from 'sync-thunk';
 
 export default function() {
   return (dispatch, getState) => {
-    syncThunk.syncMyThunks(dispatch, getState, [
+    syncThunk.sync(dispatch, getState, [
       user,
       courses
     ])

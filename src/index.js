@@ -4,6 +4,6 @@ import getReducerMap from './reducerMap';
 
 export default {
   setActionMap: actionMap,
-  syncMyThunks,
+  sync: syncMyThunks,
   getReducerMap
 }
