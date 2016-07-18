@@ -6,7 +6,7 @@
 // action: action that is called that populates that state
 // reducer: the reducer that is used to reduce that state
 
-import actionMap from './actionMap';
+import actionMapLoader from './actionMap';
 
 // Empty action to dispatch so that we can add more calls on top of this to resolve
 // All actions are dispatched sequentially, so we need one to start with
@@ -20,13 +20,18 @@ function shouldCallAction(dep, stateVal) {
   return dep.reload || !stateVal || Object.keys(stateVal).length === 0;
 }
 
-export function syncThunk(dispatch, getState, dependencies) {
+export default function(dispatch, getState, dependencies) {
+
+  const actionMap = actionMapLoader();
+
   // If we're already resolving a bunch of dependencies, don't do this again
   if(getState().asyncStatus)
     return;
 
-  // Set the dispatch to show we're resolving a bunch of actions
-  dispatch(actionMap.asyncStatus.action(true));
+  if(actionMap.asyncStatus) {
+    // Set the dispatch to show we're resolving a bunch of actions
+    dispatch(actionMap.asyncStatus.action(true));
+  }
   
   // Create a list of all the required actions.
   // If they need to be reloaded, then add them to the call stack
@@ -37,7 +42,7 @@ export function syncThunk(dispatch, getState, dependencies) {
     const stateVal = getState()[dep.state];
     
     if(shouldCallAction(dep, stateVal))
-      requiredActions.push(actionMapping[dep.state].action);
+      requiredActions.push(actionMap[dep.state].action);
   });
 
   // Load all calls sequentially

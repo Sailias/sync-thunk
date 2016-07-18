@@ -1,9 +1,9 @@
 import actionMap from './actionMap';
-import syncMyThunks from './bulkActionResolver';
+import sync from './bulkActionResolver';
 import getReducerMap from './reducerMap';
 
 export default {
   setActionMap: actionMap,
-  sync: syncMyThunks,
+  sync,
   getReducerMap
 }

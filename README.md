@@ -23,7 +23,7 @@ I like to think of this structure like:
 const actionMap = {
   user: { action: actions.loadUser, reducer: userReducer },
   courses: { action: actions.loadCourses, reducer: courseReducer }
-}
+};
 ```
 
 I feel all actions should use `state` to load their required data before making an API call.
@@ -48,8 +48,8 @@ import syncThunk from 'sync-thunk';
 export default function() {
   return (dispatch, getState) => {
     syncThunk.sync(dispatch, getState, [
-      user,
-      courses
+      { state: 'user' },
+      { state: 'courses', reload: true }
     ])
   }
 }
