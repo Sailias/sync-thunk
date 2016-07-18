@@ -1,0 +1,37 @@
+{
+  "name": "sync-thunk",
+  "version": "1.0.0",
+  "description": "A library to combine state, actions and syncronously make API calls",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf build",
+    "build": "npm run clean && babel src --out-dir build --presets=es2015,stage-0 && cp package.json ./build/",
+    "watch": "babel src --out-dir build --watch --presets=es2015,stage-0",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Sailias/sync-thunk.git"
+  },
+  "keywords": [
+    "thunk",
+    "redux",
+    "api"
+  ],
+  "author": "Jonathan Salis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sailias/sync-thunk/issues"
+  },
+  "homepage": "https://github.com/Sailias/sync-thunk#readme",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "webpack": "^1.13.1",
+    "whatwg-fetch": "^1.0.0"
+  }
+}
