@@ -42,14 +42,6 @@ export function syncThunk(dispatch, getState, dependencies) {
 
   // Load all calls sequentially
   // Some future calls rely on the response and setting in the store of previous ones
-  // So load them one by one in a loop
-  // let sequence = dispatch(emptyAction());
-  // requiredActions.forEach(action => {
-  //   sequence = sequence.then(() => dispatch(action()));
-  // })
-
-  // return sequence;
-
   return requiredActions.reduce((sequence, action) => {
     return sequence.then(() => dispatch(action()))
   }, dispatch(emptyAction()));
