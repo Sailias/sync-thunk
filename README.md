@@ -30,8 +30,8 @@ I feel all actions should use `state` to load their required data before making 
 
 #### Implementation
 
-
-``` reducers/index.js
+reducers/index.js
+``` 
 import { combineReducers } from 'redux';
 import syncThunk from 'sync-thunk';
 import actions from 'actions';
@@ -41,7 +41,8 @@ syncThunk.setActionMap(actionMap);
 combineReducers(syncThunk.getReducerMap());
 ```
 
-``` actions/pages/home.js
+actions/pages/home.js
+``` 
 import syncThunk from 'sync-thunk';
 
 export default function() {
@@ -55,7 +56,8 @@ export default function() {
 
 ```
 
-``` actions/userAction.js
+actions/userAction.js
+``` 
 export default function() {
   return (dispatch) => fetch('/user').then(userResponse => 
     dispatch(setUserInStore(userResponse))
@@ -63,7 +65,8 @@ export default function() {
 }
 ```
 
-``` actions/courseActions.js
+actions/courseActions.js
+``` 
 export default function() {
   return (dispatch, getState) => {
     const { user } = getState();
