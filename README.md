@@ -78,4 +78,41 @@ export default function() {
 }
 ```
 
+#### Using it in your components
+
+SyncThunk will check the value of your state keys to see if the value is already loaded, if it is, it won't make the API call again.  If it's not, it will make the API call then move on to the next required state key.
+This allows you to not reload any already loaded data, or reload it all if necessary (Page refresh).
+
+Now all we do is create Thunks that load exactly what they need to set their state, and we create components that specify which states they need loaded!
+
+components/views/Home.js
+```
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import actions from 'actions';
+
+class Home extends React.Component {
+  componentWillMount() {
+    this.props.homeLoader();
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    courses: state.courses
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    homeLoader: actions.homeLoader
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+```
+
+
 
