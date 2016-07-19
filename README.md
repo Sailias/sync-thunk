@@ -49,7 +49,7 @@ export default function() {
   return (dispatch, getState) => {
     syncThunk.sync(dispatch, getState, [
       { state: 'user' },
-      { state: 'courses', reload: true }
+      { state: 'courses', reload: true } // reload this state every time even if it's already populated
     ])
   }
 }
