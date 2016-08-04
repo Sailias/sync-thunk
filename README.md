@@ -48,7 +48,7 @@ import syncThunk from 'sync-thunk';
 export default function() {
   return (dispatch, getState) => {
     syncThunk.sync(dispatch, getState, [
-      { state: 'user' },
+      { state: 'user', key: 'foo' }, // Look for a key of foo in user
       { state: 'courses', reload: true } // reload this state every time even if it's already populated
     ])
   }

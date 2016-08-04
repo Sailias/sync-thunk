@@ -32,15 +32,19 @@ export default function(dispatch, getState, dependencies) {
     // Set the dispatch to show we're resolving a bunch of actions
     dispatch(actionMap.asyncStatus.action(true));
   }
-  
+
   // Create a list of all the required actions.
   // If they need to be reloaded, then add them to the call stack
   // If they are already in the state, then don't add them
   let requiredActions = [];
-  
+
   dependencies.forEach(dep => {
-    const stateVal = getState()[dep.state];
-    
+    let stateVal = getState()[dep.state];
+
+    if (dep.key) {
+      stateVal = stateVal[dep.key];
+    }
+
     if(shouldCallAction(dep, stateVal))
       requiredActions.push(actionMap[dep.state].action);
   });
