@@ -50,8 +50,8 @@ export default function(params = {}) {
     syncThunk.sync(dispatch, getState, [
       { state: 'user' },
       { state: 'courses', 
-        reload: true,   // OPTION: reload this state every time even if it's already populated
-        // params: params.program  // OPTION: if loaders require additional information from props, pass them as parameters 
+        reload: true,   // reload this state every time even if it's already populated
+        params: params.program  // if loaders require additional information from props, pass them as parameters 
       } 
     ])
   }
