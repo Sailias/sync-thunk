@@ -42,13 +42,14 @@ export default function(dispatch, getState, dependencies) {
     const stateVal = getState()[dep.state];
     
     if(shouldCallAction(dep, stateVal))
-      requiredActions.push(actionMap[dep.state].action);
+      requiredActions.push({action: actionMap[dep.state].action, params: dep.params});
   });
 
   // Load all calls sequentially
   // Some future calls rely on the response and setting in the store of previous ones
-  return requiredActions.reduce((sequence, action) => {
-    return sequence.then(() => dispatch(action()))
+  return requiredActions.reduce((sequence, actionObj) => {
+    return sequence.then(() => dispatch(actionObj.action(actionObj.params)))
   }, dispatch(emptyAction()));
+
 
 }

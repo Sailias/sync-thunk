@@ -45,11 +45,14 @@ actions/pages/home.js
 ``` 
 import syncThunk from 'sync-thunk';
 
-export default function() {
+export default function(params = {}) {
   return (dispatch, getState) => {
     syncThunk.sync(dispatch, getState, [
       { state: 'user' },
-      { state: 'courses', reload: true } // reload this state every time even if it's already populated
+      { state: 'courses', 
+        reload: true,   // reload this state every time even if it's already populated
+        params: params.program  // if loaders require additional information from props, pass them as parameters 
+      } 
     ])
   }
 }
@@ -93,14 +96,18 @@ import actions from 'actions';
 
 class Home extends React.Component {
   componentWillMount() {
-    this.props.homeLoader();
+    this.props.homeLoader(
+      program: {
+        id: 5,
+      }
+    });
   }
 }
 
 function mapStateToProps(state) {
   return {
     user: state.user,
-    courses: state.courses
+    courses: state.courses,
   };
 }
 
