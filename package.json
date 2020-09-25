@@ -2,7 +2,7 @@
   "name": "sync-thunk",
   "version": "1.0.0",
   "description": "A library to combine state, actions and syncronously make API calls",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "clean": "rm -rf build",
     "build": "npm run clean && babel src --out-dir build --presets=es2015,stage-0 && cp package.json ./build/",
